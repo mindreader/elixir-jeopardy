@@ -19,46 +19,53 @@ defmodule Jeopardy.QuestionServer do
   use GenServer
 
   def start_link do
-    IO.puts("loading questions")
-    qs = Question.load_all
+    IO.puts("loading categories")
+    ts = CategoryIndex.load
     IO.puts("finished loading")
 
-    GenServer.start_link(__MODULE__, qs, name: __MODULE__ )
+    GenServer.start_link(__MODULE__, ts, name: __MODULE__ )
   end
 
-  def init(qs) do
-    {:ok, qs}
+  def init(ts) do
+    {:ok, ts}
+  end
+
+  def handle_call(:get_state, _from, ts) do
+    {:reply, ts, ts}
   end
 
 
-
-  def handle_call(:count, _from, qs) do
-    {:reply, qs |> Enum.count, qs}
+  def handle_call(:count, _from, ts) do
+    {:reply, ts |> CategoryIndex.question_count, ts}
   end
 
-  def handle_call(:categories, _from, qs) do
-    {:reply, qs |> Question.categories, qs}
+  def handle_call(:categories, _from, ts) do
+    {:reply, ts |> CategoryIndex.categories, ts}
   end
   
-  def handle_call(:categories_by_popularity, _from, qs) do
-    {:reply, qs |> Question.categories_by_popularity, qs}
+  def handle_call(:categories_by_popularity, _from, ts) do
+    {:reply, ts |> CategoryIndex.by_popularity, ts}
   end
 
-  def handle_call(:get_random_category, _from, qs) do
-    {:reply, qs |> Question.get_random_category, qs}
+  def handle_call(:get_random_category, _from, ts) do
+    {:reply, ts |> CategoryIndex.random, ts}
   end
 
-  def handle_call(:get_random_weighted_category, _from, qs) do
-    {:reply, qs |> Question.get_random_weighted_category, qs}
+  def handle_call(:get_random_weighted_category, _from, ts) do
+    {:reply, ts |> CategoryIndex.random_weighted, ts}
   end
 
-  def handle_call(:ask_random_weighted_category, _from, qs) do
-    cat = qs |> Question.get_random_weighted_category
-    {:reply, qs |> Question.by_category(cat), qs}
+  def handle_call(:ask_random_weighted_category, _from, ts) do
+    cat = ts |> CategoryIndex.random_weighted
+    {:reply, CategoryIndex.category_questions(ts, cat), ts}
   end
 end
 
 defmodule Jeopardy do
+
+  def get_state do
+    GenServer.call(Jeopardy.QuestionServer, :get_state)
+  end
   def count do
     GenServer.call(Jeopardy.QuestionServer, :count)
   end
