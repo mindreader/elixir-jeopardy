@@ -1,24 +1,7 @@
-defmodule Jeopardy.Supervisor do
-  use Supervisor
-
-  def start_link do
-    Supervisor.start_link(__MODULE__, nil)
-  end
-
-  def init(nil) do
-    children = [
-      worker(Jeopardy.QuestionServer, [])
-    ]
-    opts = [strategy: :one_for_one]
-    supervise(children, opts)
-
-  end
-end
-
 defmodule Jeopardy.QuestionServer do
   use GenServer
 
-  def start_link do
+  def start_link(_args) do
     IO.puts("loading categories")
     ts = CategoryIndex.load
     IO.puts("finished loading")
