@@ -60,6 +60,7 @@ defmodule Question do
     nil
   end
 
+  # Just the necessary stuff for the web.
   def slim(%Question{question: q, answer: a}) do
     %{question: q, answer: a}
   end
