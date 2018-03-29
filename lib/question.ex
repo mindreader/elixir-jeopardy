@@ -100,7 +100,16 @@ defmodule Question do
   end
 
   def load(fname) when is_bitstring(fname) do
-    "questions/#{fname}" |> File.read! |> Poison.decode!(as: %Question{})
+    q = "questions/#{fname}" |> File.read! |> Poison.decode!(as: %Question{})
+
+    # some of the questions had their answers inside a single element list during
+    # initial scraping (a bug since fixed).
+    %Question { q | answer:
+      case q.answer do
+        [a] -> a
+        a -> a
+      end
+    }
   end
 
   def save(%Question{} = q) do
