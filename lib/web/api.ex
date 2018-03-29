@@ -1,5 +1,6 @@
 # TODO I'd love to have an openapi specification for this
 # https://github.com/mbuhot/open_api_spex
+
 defmodule JeopardyWeb.API do
   use JeopardyWeb, :controller
 
