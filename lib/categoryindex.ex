@@ -38,7 +38,7 @@ defmodule CategoryIndex do
   end
 
   def category_questions(%CategoryIndex{} = ti, category) do
-    ti.categories |> Map.get(category) |> Enum.map(&load_question/1)
+    (ti.categories |> Map.get(category) || []) |> Enum.map(&load_question/1)
   end
 
   def save(%CategoryIndex{} = idx) do
