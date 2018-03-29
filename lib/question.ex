@@ -13,6 +13,7 @@ defmodule Question do
 
   def filename(gamenum, round, qidx) do
      "#{gamenum}_#{round}_" <> case qidx do
+      "fj" -> "fj"
       :fj -> "fj"
       [col,num] -> "#{col}_#{num}"
     end <> ".q"
