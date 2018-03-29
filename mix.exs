@@ -5,10 +5,17 @@ defmodule Jeopardy.Mixfile do
     [app: :jeopardy,
      version: "0.1.0",
      elixir: "~> 1.4",
+     elixirc_paths: elixirc_paths(Mix.env),
+     compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
+
 
   # Configuration for the OTP application
   #
@@ -17,7 +24,7 @@ defmodule Jeopardy.Mixfile do
     # Specify extra applications you'll use from Erlang/Elixir
     [
       extra_applications: [:logger],
-      mod: {App.Jeopardy, []},
+      mod: {Jeopardy.Application, []},
     ]
   end
 
@@ -34,7 +41,11 @@ defmodule Jeopardy.Mixfile do
     [
       {:httpotion, "~> 3.0"},
       {:floki, "~> 0.19.0"},
-      {:poison, "~> 3.0"}
+      {:poison, "~> 3.0"},
+      {:phoenix, "~> 1.3.0"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.11"},
+      {:cowboy, "~> 1.0"}
     ]
   end
 end
