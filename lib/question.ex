@@ -46,8 +46,12 @@ defmodule CategoryIndex do
   end
 
   def load do
+    txt = case "questions/category_index.idx" |> File.read do
+      {:ok, txt} -> txt |> Poison.decode!
+      _ -> File.mkdir("questions"); %{}
+    end
     %CategoryIndex{
-      categories: "questions/category_index.idx" |> File.read! |> Poison.decode!
+      categories: txt
     }
   end
 
