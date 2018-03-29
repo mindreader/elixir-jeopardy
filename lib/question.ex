@@ -29,12 +29,12 @@ defmodule CategoryIndex do
     ti |> categories |> Enum.random
   end
 
-  def random_weighted(%CategoryIndex{} = ti) do
+  def random_weighted(%CategoryIndex{} = ti, n) do
     r = ti |> question_count |> :rand.uniform |> (fn x -> x + 1 end).()
 
     ti |> by_popularity
       |> Enum.map_reduce(0, fn {cat,n},acc -> {{cat,n + acc},n+acc} end)
-      |> elem(0) |> Enum.drop_while(fn {_cat,n} -> n <= r end) |> hd |> elem(0)
+      |> elem(0) |> Enum.drop_while(fn {_cat,n} -> n <= r end) |> Enum.take(n) |> Enum.map(fn x -> x |> elem(0) end)
   end
 
   def category_questions(%CategoryIndex{} = ti, category) do
@@ -57,6 +57,10 @@ defmodule CategoryIndex do
 
   def load_question([gamenum,round,qidx]) do
     Question.filename(gamenum,round,qidx) |> Question.load
+  end
+
+  def slim(%Question{question: q, answer: a}) do
+    %{question: q, answer: a}
   end
 end
 
