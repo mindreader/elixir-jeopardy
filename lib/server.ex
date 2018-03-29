@@ -34,13 +34,13 @@ defmodule Jeopardy.QuestionServer do
     {:reply, ts |> CategoryIndex.random, ts}
   end
 
-  def handle_call(:get_random_weighted_category, _from, ts) do
-    {:reply, ts |> CategoryIndex.random_weighted, ts}
+  def handle_call({:get_random_weighted_category, n}, _from, ts) do
+    {:reply, ts |> CategoryIndex.random_weighted(n), ts}
   end
 
   def handle_call(:get_random_weighted_category_and_questions, _from, ts) do
     cat = ts |> CategoryIndex.random_weighted
-    {:reply, CategoryIndex.category_questions(ts, cat), ts}
+    {:reply, %{category: cat, questions: CategoryIndex.category_questions(ts, cat)}, ts}
   end
 end
 
@@ -66,15 +66,24 @@ defmodule Jeopardy do
   end
 
   def get_random_weighted_category do
-    GenServer.call(Jeopardy.QuestionServer, :get_random_weighted_category)
+    get_random_weighted_categories(1) |> hd
   end
-
-  def ask_random_weighted_category do
-    GenServer.call(Jeopardy.QuestionServer, :get_random_weighted_category_and_questions)
-      |> Enum.each(&Question.ask/1)
+  def get_random_weighted_categories(n) do
+    GenServer.call(Jeopardy.QuestionServer, {:get_random_weighted_category, n})
   end
 
   def get_random_weighted_category_and_questions do
     GenServer.call(Jeopardy.QuestionServer, :get_random_weighted_category_and_questions)
   end
+
+  def get_random_weighted_category_and_questions_slim do
+    GenServer.call(Jeopardy.QuestionServer, :get_random_weighted_category_and_questions)
+  end
+
+
+  def ask_random_weighted_category do
+    GenServer.call(Jeopardy.QuestionServer, :get_random_weighted_category_and_questions).questions
+      |> Enum.each(&Question.ask/1)
+  end
+
 end
