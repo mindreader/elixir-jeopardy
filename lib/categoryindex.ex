@@ -59,7 +59,4 @@ defmodule CategoryIndex do
     Question.filename(gamenum,round,qidx) |> Question.load
   end
 
-  def slim(%Question{question: q, answer: a}) do
-    %{question: q, answer: a}
-  end
 end

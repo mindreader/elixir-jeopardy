@@ -59,4 +59,9 @@ defmodule Question do
     IO.puts([q.answer, "\n"])
     nil
   end
+
+  def slim(%Question{question: q, answer: a}) do
+    %{question: q, answer: a}
+  end
+
 end
