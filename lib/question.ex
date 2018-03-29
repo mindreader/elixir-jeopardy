@@ -103,7 +103,7 @@ defmodule Question do
     fname = q |> filename
     json = Poison.encode!(q)
 
-    File.write("questions/#{fname}.q", json)
+    File.write("questions/#{fname}", json)
   end
 
   def ask(%Question{} = q) do
