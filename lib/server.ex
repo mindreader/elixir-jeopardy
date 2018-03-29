@@ -38,7 +38,7 @@ defmodule Jeopardy.QuestionServer do
     {:reply, ts |> CategoryIndex.random_weighted, ts}
   end
 
-  def handle_call(:ask_random_weighted_category, _from, ts) do
+  def handle_call(:get_random_weighted_category_and_questions, _from, ts) do
     cat = ts |> CategoryIndex.random_weighted
     {:reply, CategoryIndex.category_questions(ts, cat), ts}
   end
@@ -70,7 +70,11 @@ defmodule Jeopardy do
   end
 
   def ask_random_weighted_category do
-    GenServer.call(Jeopardy.QuestionServer, :ask_random_weighted_category)
+    GenServer.call(Jeopardy.QuestionServer, :get_random_weighted_category_and_questions)
       |> Enum.each(&Question.ask/1)
+  end
+
+  def get_random_weighted_category_and_questions do
+    GenServer.call(Jeopardy.QuestionServer, :get_random_weighted_category_and_questions)
   end
 end
