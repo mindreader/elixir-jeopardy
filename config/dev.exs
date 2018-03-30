@@ -13,6 +13,7 @@ config :jeopardy, JeopardyWeb.Endpoint,
   check_origin: false,
   reloadable_compilers: [:phoenix, :elixir]
 
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
@@ -34,6 +35,8 @@ config :jeopardy, JeopardyWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{lib/(web)?.*\.ex$},
+      ~r{lib/web/templates/(page|layout|).*(eex)$},
     ]
   ]
 

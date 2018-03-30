@@ -43,7 +43,7 @@ defmodule Jeopardy.QuestionServer do
   end
 
   def handle_call(:get_random_weighted_category_and_questions, _from, ts) do
-    cat = ts |> CategoryIndex.random_weighted
+    cat = ts |> CategoryIndex.random_weighted(1) |> hd
     {:reply, %{category: cat, questions: CategoryIndex.category_questions(ts, cat)}, ts}
   end
 end

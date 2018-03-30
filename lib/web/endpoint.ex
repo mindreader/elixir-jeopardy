@@ -1,6 +1,15 @@
 defmodule JeopardyWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :jeopardy
 
+  # Serve at "/" the static files from "priv/static" directory.
+  #
+  # You should set gzip to true if you are running phoenix.digest
+  # when deploying your static files in production.
+  plug Plug.Static,
+    at: "/", from: :jeopardy, gzip: true,
+    only: ~w(css fonts images js favicon.ico robots.txt)
+
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
@@ -27,12 +36,11 @@ defmodule JeopardyWeb.Endpoint do
   plug JeopardyWeb.Router
 
   def init(_key, config) do
-     {:ok, Keyword.put(config, :http, [:inet6, port: 4000])}
-#    if config[:load_from_system_env] do
-#      port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
-#      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
-#    else
-#      {:ok, IO.inspect(config)}
-#    end
+    if config[:load_from_system_env] do
+      port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
+      {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+    else
+      {:ok, config}
+    end
   end
 end

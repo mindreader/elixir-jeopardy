@@ -32,7 +32,10 @@ use Mix.Config
 # Configures the endpoint
 config :jeopardy, JeopardyWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: JeopardyWeb.ErrorView, accepts: ~w(html json)]
+  render_errors: [view: JeopardyWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: JeopardyWeb.PubSub,
+           adapter: Phoenix.PubSub.PG2]
+
 
 
 # Configures Elixir's Logger
