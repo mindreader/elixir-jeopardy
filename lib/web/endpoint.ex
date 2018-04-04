@@ -1,24 +1,25 @@
 defmodule JeopardyWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :jeopardy
 
-  # Serve at "/" the static files from "priv/static" directory.
-  #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
+
+  # create react app places its static files in non standard directories
   plug Plug.Static,
-    at: "/", from: :jeopardy, gzip: true,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    at: "/", from: {:jeopardy, "priv/static"}, gzip: true,
+    only: ~w(index.html service-worker.js favicon.ico robots.txt)
+
+  plug Plug.Static,
+    at: "/static", from: {:jeopardy, "priv/static/static"}, gzip: true,
+    only: ~w(css js media)
 
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
-    IO.puts("code reloading!")
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-  else
-    IO.puts("no code reloading!")
   end
 
 
@@ -32,6 +33,7 @@ defmodule JeopardyWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
 
+  plug CORSPlug
 
   plug JeopardyWeb.Router
 

@@ -1,0 +1,87 @@
+@font-face {
+  font-family: helveticacompressed;
+  src: url(./fonts/Helvetica Compressed.ttf);
+}
+
+@font-face {
+  font-family: scakorinnabold;
+  src: url(./fonts/scakorinnabold.ttf);
+}
+
+html {
+
+/*  jeopardy blue #0e0e88; */
+  height: 100%;
+
+  /* there's gotta be a way to smooth this. sass algorithm? */
+  background: linear-gradient(125deg, #0e0e88, #121288, #161688, #1a1a88, #1e1e88);
+}
+
+/* Prevent fonts from popping in the first time they are used */
+.font_preload span.scakorinnabold {
+  font: 100% scakorinnabold;
+}
+
+.font_preload span.helveticacomperssed {
+  font: 100% helveticacomperssed;
+}
+
+
+#jeopardy {
+  max-width: 80%;
+  margin: 0px auto;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.category {
+  color: white;
+  font: 150% helveticacomperssed;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 0px black;
+  margin-bottom: 20px;
+}
+
+.questions, .question {
+  color: white;
+  font: 120% scakorinnabold;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  text-shadow: 2px 2px 0px black;
+}
+
+@media (max-width: 600px) {
+  .questions, .question {
+    max-width: 90%;
+  }
+}
+@media (max-height: 400px) {
+  #jeopardy {
+    margin-top: 30px;
+  }
+}
+
+@media (max-height: 300px) {
+  #jeopardy {
+    margin-top: 10px;
+  }
+}
+
+
+.answer {
+  color: white;
+  font: 210% scakorinnabold;
+  text-align: center;
+  text-shadow: 3px 3px 0px black;
+}
+
+.unbulletted {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
