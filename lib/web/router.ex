@@ -19,3 +19,25 @@ defmodule JeopardyWeb.ErrorView do
     conn |> send_resp(404, "unknown route")
   end
 end
+
+defmodule JeopardyWeb.IndexRoute do
+  use Plug.Router
+
+  plug Plug.Static, at: "/", from: "priv/static"
+  plug :match
+  plug :dispatch
+
+  # This allows
+
+
+  # TODO I would strongly prefer to send this through the same
+  # block of static code in lib/web/endpoint.ex,
+  # but this will be fine for now.
+  get "/" do
+    send_file(conn, 200, "priv/static/index.html")
+  end
+
+  match _ do
+    conn
+  end
+end

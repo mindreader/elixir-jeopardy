@@ -5,6 +5,10 @@ defmodule JeopardyWeb.Endpoint do
   # when deploying your static files in production.
 
   # create react app places its static files in non standard directories
+
+  # serve "/" as if it were "index.html"
+  plug JeopardyWeb.IndexRoute
+
   plug Plug.Static,
     at: "/", from: {:jeopardy, "priv/static"}, gzip: true,
     only: ~w(index.html service-worker.js favicon.ico robots.txt)
