@@ -10,13 +10,12 @@ defmodule JeopardyWeb.Endpoint do
   plug JeopardyWeb.IndexRoute
 
   plug Plug.Static,
-    at: "/", from: {:jeopardy, "priv/static"}, gzip: true,
+    at: "/", from: {:jeopardy, "priv/static"}, gzip: false,
     only: ~w(index.html service-worker.js favicon.ico robots.txt)
 
   plug Plug.Static,
-    at: "/static", from: {:jeopardy, "priv/static/static"}, gzip: true,
+    at: "/static", from: {:jeopardy, "priv/static/static"}, gzip: false,
     only: ~w(css js media)
-
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
