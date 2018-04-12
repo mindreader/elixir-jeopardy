@@ -86,7 +86,7 @@ class Jeopardy extends React.Component {
 
   loadQuestions(cat) {
 
-    fetch("http://localhost:4000/api/questions/bycategory/" + encodeURIComponent(cat))
+    fetch("api/questions/bycategory/" + encodeURIComponent(cat))
       .then(response => response.json())
       .then(json => {
         this.setState({
