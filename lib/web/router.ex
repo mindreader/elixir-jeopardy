@@ -39,7 +39,7 @@ defmodule JeopardyWeb.IndexRoute do
   # block of static code in lib/web/endpoint.ex,
   # but this will be fine for now.
   get "/" do
-    send_file(conn, 200, "priv/static/index.html") |> halt
+    send_file(conn, 200, Application.app_dir(:jeopardy, "priv/static/index.html")) |> halt
   end
 
   match _ do

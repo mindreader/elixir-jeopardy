@@ -47,7 +47,8 @@ defmodule Jeopardy.Mixfile do
       {:cors_plug, "~> 1.5"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:phoenix_pubsub, "~> 1.0"} # only for live reloading
+      {:phoenix_pubsub, "~> 1.0"}, # only for live reloading
+      {:distillery, "~> 1.0"}
     ]
   end
 end

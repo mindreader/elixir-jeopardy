@@ -24,18 +24,22 @@ defmodule Question do
   end
 
   def load_all do
-    Path.wildcard("questions/*.q") |> Enum.map(&Path.basename/1) |> Enum.map(&load/1)
+    Path.wildcard("#{question_dir()}/*.q") |> Enum.map(&Path.basename/1) |> Enum.map(&load/1)
+  end
+
+  def question_dir do
+    Application.fetch_env!(:jeopardy, :question_dir)
   end
 
   def save_all(questions) do
-    case File.mkdir("questions") do
+    case File.mkdir(question_dir()) do
       val when val in [:ok, {:error, :eexist}] -> questions |> Enum.each(&save/1)
       val -> IO.puts("Could not create questions directory."); {:error, val}
     end
   end
 
   def load(fname) when is_bitstring(fname) do
-    q = "questions/#{fname}" |> File.read! |> Poison.decode!(as: %Question{})
+    q = "#{question_dir()}/#{fname}" |> File.read! |> Poison.decode!(as: %Question{})
 
     # some of the questions had their answers inside a single element list during
     # initial scraping (a bug since fixed).

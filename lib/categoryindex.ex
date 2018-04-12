@@ -42,11 +42,11 @@ defmodule CategoryIndex do
   end
 
   def save(%CategoryIndex{} = idx) do
-    idx.categories |> Poison.encode! |> (fn x -> File.write!("questions/category_index.idx", x) end).()
+    idx.categories |> Poison.encode! |> (fn x -> File.write!("#{Question.question_dir()}/category_index.idx", x) end).()
   end
 
   def load do
-    txt = case "questions/category_index.idx" |> File.read do
+    txt = case "#{Question.question_dir()}/category_index.idx" |> File.read do
       {:ok, txt} -> txt |> Poison.decode!
       _ -> File.mkdir("questions"); %{}
     end
