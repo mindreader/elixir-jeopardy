@@ -15,11 +15,16 @@ end
 
 defmodule JeopardyWeb.ErrorView do
   use JeopardyWeb, :controller
-  def render(_, conn) do
-    conn |> send_resp(404, "unknown route")
+
+  # good grief it took me way too long to find out you could just
+  # return a string...
+  def render("404.html",_) do
+    "route not found"
+  end
+  def render(_,_) do
+    "internal server error"
   end
 end
-
 defmodule JeopardyWeb.IndexRoute do
   use Plug.Router
 
