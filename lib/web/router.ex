@@ -34,7 +34,7 @@ defmodule JeopardyWeb.IndexRoute do
   # block of static code in lib/web/endpoint.ex,
   # but this will be fine for now.
   get "/" do
-    send_file(conn, 200, "priv/static/index.html")
+    send_file(conn, 200, "priv/static/index.html") |> halt
   end
 
   match _ do
