@@ -51,7 +51,7 @@ class Jeopardy extends React.Component {
   }
 
   loadCategories() {
-    fetch("https://api/categories/random")
+    fetch("api/categories/random")
       .then(response => response.json())
       .then(json => 
         this.setState({
