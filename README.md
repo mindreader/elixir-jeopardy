@@ -3,7 +3,7 @@ A jeopardy question scraper and server.  Live server at https://jeopardy.mcwebsi
 
 ## Scraper
 
-Questions are gently scraped from j-archive.com and then can be indexed by category and written out to disk.  There are about 60000 questions available, which is the last several years of jeopardy.  Questions involving pictures or audio have had them stripped out as they are usually not available to be scraped but they remain in the collection becuase there is almost always a reasonable clue to go along with them.
+Questions are gently scraped from j-archive.com and then can be indexed by category and written out to disk.  There are about 60000 questions available, which is the last several years of jeopardy.  Questions involving pictures or audio have had them stripped out as they are usually not available to be scraped but they remain in the collection because there is almost always a reasonable clue to go along with them.
 
 ## API
 
