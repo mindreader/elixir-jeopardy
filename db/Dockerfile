@@ -142,10 +142,16 @@ RUN mkdir -p /var/run/postgresql && chown -R postgres:postgres /var/run/postgres
 
 ENV PGDATA /var/lib/postgresql/data
 RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA" # this 777 will be replaced by 700 at runtime (allows semi-arbitrary "--user" values)
-VOLUME /var/lib/postgresql/data
+# VOLUME /var/lib/postgresql/data
 
 COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod 0777 /usr/local/bin/docker-entrypoint.sh
 RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
+
+RUN echo $PATH
+RUN ls -alh /usr/local/bin
+
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432

@@ -28,7 +28,7 @@ defmodule Question do
   end
 
   def question_dir do
-    Application.fetch_env!(:jeopardy, :question_dir)
+    Application.get_env(:jeopardy, Question) |> Keyword.get(:question_dir)
   end
 
   def save_all(questions) do

@@ -14,6 +14,10 @@ config :jeopardy, JeopardyWeb.Endpoint,
   reloadable_compilers: [:phoenix, :elixir]
 
 
+config :jeopardy, Question,
+  question_dir: "../jeopardy_questions"
+
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
