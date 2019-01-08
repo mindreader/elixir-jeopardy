@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  jeopardy_db:
+    build:
+      dockerfile: Dockerfile
+      context: ./db/
+    networks:
+      - jeopardy_network_dev
+    environment:
+      DB: jeopardy
+      PGDATA: /jeopardy_db_data_dev
+      POSTGRES_DB: jeopardy
+      DBPASSWORD: ${DBPASSWORD}
+
+    volumes:
+      - jeopardy_db_data_dev:/jeopardy_db_data
+
+  jeopardy:
+    build:
+      dockerfile: Dockerfile
+      context: ./elixir
+      target: jeopardy_dev
+    command: ["/bin/bash"]
+    stdin_open: true
+    tty: true
+
+    volumes:
+      - ./:/code/jeopardy
+    # for a clean dev experience, ensure that the user and group you
+    # are developing with are 1000:1000 or else change these to match
+    # If you don't, when you develop, files will be written to this
+    # directory with wonky permissions.
+    user: "1000:1000"
+    networks: [jeopardy_network_dev]
+    ports:
+      - 127.0.0.1:4000:4000
+    environment:
+      DBPASSWORD: ${DBPASSWORD}
+
+networks:
+  jeopardy_network_dev:
+
+volumes:
+  jeopardy_db_data_dev:

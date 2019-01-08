@@ -1,9 +1,7 @@
 version: '3.7'
 services:
   jeopardy-db:
-    build:
-      dockerfile: Dockerfile
-      context: ./docker/db/
+    build: ./db
     networks:
       - jeopardy-network
     environment:
@@ -17,7 +15,6 @@ services:
 
   jeopardy-prod:
     build:
-      dockerfile: Dockerfile
       context: ./elixir
       target: jeopardy-prod
       args:
@@ -35,7 +32,6 @@ services:
 
   jeopardy-dev:
     build:
-      dockerfile: Dockerfile
       context: ./elixir
       target: jeopardy-dev
       args:
