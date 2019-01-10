@@ -4,7 +4,7 @@ RUN useradd jeopardy
 RUN apt-get update && apt-get install -y inotify-tools
 
 ENV HOME=/code
-WORKDIR /code/jeopardy
+WORKDIR /code/jeopardy/backend
 RUN chown jeopardy: /code
 
 USER jeopardy
