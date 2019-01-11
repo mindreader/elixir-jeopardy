@@ -1,57 +1,44 @@
 version: '3.7'
 services:
-  jeopardy-db:
+  db:
     build: ./db
     networks:
-      - jeopardy-network
+      - prod
     environment:
       DB: jeopardy
       PGDATA: /jeopardy-db-data
       POSTGRES_DB: jeopardy
       DBPASSWORD: ${DBPASSWORD}
 
-    volumes:
-      - jeopardy-db-data:/jeopardy-db-data
 
-  jeopardy-prod:
+    volumes:
+      - db-data-prod:/jeopardy-db-data
+
+  backend:
     build:
-      context: ./elixir
-      target: jeopardy-prod
-      args:
-        - ELIXIR_VERSION=1.7.4
-        - ELIXIR_DOWNLOAD_SHA256=c7c87983e03a1dcf20078141a22355e88dadb26b53d3f3f98b9a9268687f9e20
-    networks: [jeopardy-network]
+      dockerfile: Dockerfile
+      context: ./backend
+      target: prod
+    networks: [prod]
     init: true
     restart: unless-stopped
     environment:
       DBPASSWORD: ${DBPASSWORD}
+      PORT: 80
 
     entrypoint: ["/app/bin/jeopardy"]
     command: ["foreground"]
 
 
-  jeopardy-dev:
+  frontend:
     build:
-      context: ./elixir
-      target: jeopardy-dev
-      args:
-        - ELIXIR_VERSION=1.7.4
-        - ELIXIR_DOWNLOAD_SHA256=c7c87983e03a1dcf20078141a22355e88dadb26b53d3f3f98b9a9268687f9e20
-    command: ["/bin/bash"]
-
-    volumes:
-      - ./:/code/jeopardy
-    # for a clean dev experience, ensure that the user and group you
-    # are developing with are 1000:1000 or else change these to match
-    # If you don't, when you develop, files will be written to this
-    # directory with wonky permissions.
-    user: "1000:1000"
-    networks: [jeopardy-network]
-    environment:
-      DBPASSWORD: ${DBPASSWORD}
+      dockerfile: Dockerfile
+      context: ./frontend
+      target: prod
+    networks: [prod]
 
 networks:
-  jeopardy-network:
+  prod:
 
 volumes:
-  jeopardy-db-data:
+  db-data-prod:

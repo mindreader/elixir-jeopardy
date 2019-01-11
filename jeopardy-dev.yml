@@ -18,7 +18,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./backend
-      target: jeopardy_dev
+      target: dev
     command: ["/bin/bash"]
     stdin_open: true
     tty: true
@@ -40,7 +40,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./frontend
-      target: foobar
+      target: dev
     command: ["/bin/bash"]
     stdin_open: true
     tty: true
