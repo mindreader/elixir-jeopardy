@@ -13,7 +13,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "//": "proxy unknown requests to 4000 (elixir) for development",
-  "proxy": "http://localhost:000"
+  }
 }
