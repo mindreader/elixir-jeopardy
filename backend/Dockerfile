@@ -1,4 +1,4 @@
-FROM elixir:1.7.4 as dev
+FROM elixir:1.7.4-slim as dev
 RUN useradd jeopardy
 
 RUN apt-get update && apt-get install -y inotify-tools
@@ -25,7 +25,6 @@ COPY mix.exs mix.lock ./
 COPY config ./config
 
 RUN mix deps.get
-RUN mix deps.compile
 
 COPY rel rel/
 COPY lib lib/
@@ -35,11 +34,12 @@ COPY config/prod.exs rel/etc/prod.exs
 
 RUN mix release --no-tar --verbose --env=prod
 
-FROM elixir:1.7.4 as prod
+# debian:stretch is what elixir:1.7.4-slim is built on
+FROM debian:stretch as prod
 
-# RUN mkdir /app  && chown -R nobody: /app
+RUN apt-get update && apt-get install -y openssl
+
 WORKDIR /app
-# USER nobody
 ENV HOME=/app
 
 COPY --from=release /app/_build/prod/rel/jeopardy ./
