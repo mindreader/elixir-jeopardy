@@ -44,10 +44,10 @@ defmodule Jeopardy.Mixfile do
       {:poison, "~> 3.0"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_pubsub, "~> 1.0"}, # only for live reloading
       {:cors_plug, "~> 1.5"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:phoenix_pubsub, "~> 1.0"}, # only for live reloading
       {:postgrex, "~> 0.14"},
       {:distillery, "~> 2.0"}
     ]
