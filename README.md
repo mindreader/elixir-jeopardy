@@ -17,3 +17,11 @@ There are only two exposed at the moment
 ## Frontend
 
 The frontend is written in reactjs.  Fonts are free fonts that are reasonably similar to the actual jeopardy fonts.
+
+## Future
+
+  * containerize this whole thing (70%)
+  * get the questions into a database (15%)
+  * add a parser combinator to the scraper instead of the ad-hoc cleanup I have now
+  * add training functionality to allow a person to drill themselves on questions
+  * try to tag content of questions to allow for training on specific topics
