@@ -5,15 +5,14 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./db/
-    networks: [dev]
+
     environment:
-      DB: jeopardy
-      PGDATA: /jeopardy_db_data_dev
       POSTGRES_DB: jeopardy
       DBPASSWORD: ${DBPASSWORD}
 
+    networks: [dev]
     volumes:
-      - db-data-dev:/jeopardy_db_data
+      - db-data-dev:/var/lib/postgresql/data
 
   backend:
     image: jeopardy-backend-dev
@@ -32,6 +31,7 @@ services:
     # If you don't, when you develop, files will be written to this
     # directory with wonky permissions.
     user: "1000:1000"
+
     networks: [dev]
     ports:
       - 127.0.0.1:4000:4000
@@ -55,6 +55,7 @@ services:
     # If you don't, when you develop, files will be written to this
     # directory with wonky permissions.
     user: "1000:1000"
+
     networks: [dev]
     ports:
       - 127.0.0.1:3000:3000

@@ -2,14 +2,15 @@ version: '3.7'
 services:
   db:
     image: jeopardy-db-prod
-    build: ./db
-    networks:
-      - prod
+    build:
+      dockerfile: Dockerfile
+      context: ./db
+
     environment:
-      DB: jeopardy
       POSTGRES_DB: jeopardy
       DBPASSWORD: ${DBPASSWORD}
 
+    networks: [prod]
     volumes:
       - db-data-prod:/var/lib/postgresql/data
 
