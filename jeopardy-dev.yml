@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   db:
+    image: jeopardy-db-dev
     build:
       dockerfile: Dockerfile
       context: ./db/
@@ -15,6 +16,7 @@ services:
       - db-data-dev:/jeopardy_db_data
 
   backend:
+    image: jeopardy-backend-dev
     build:
       dockerfile: Dockerfile
       context: ./backend
@@ -37,6 +39,7 @@ services:
       DBPASSWORD: ${DBPASSWORD}
 
   frontend:
+    image: jeopardy-frontend-dev
     build:
       dockerfile: Dockerfile
       context: ./frontend

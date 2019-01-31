@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   db:
+    image: jeopardy-db-prod
     build: ./db
     networks:
       - prod
@@ -13,6 +14,7 @@ services:
       - db-data-prod:/var/lib/postgresql/data
 
   backend:
+    image: jeopardy-backend-prod
     build:
       dockerfile: Dockerfile
       context: ./backend
@@ -29,6 +31,7 @@ services:
 
 
   frontend:
+    image: jeopardy-frontend-prod
     build:
       dockerfile: Dockerfile
       context: ./frontend
