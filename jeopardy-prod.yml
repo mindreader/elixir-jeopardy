@@ -6,13 +6,11 @@ services:
       - prod
     environment:
       DB: jeopardy
-      PGDATA: /jeopardy-db-data
       POSTGRES_DB: jeopardy
       DBPASSWORD: ${DBPASSWORD}
 
-
     volumes:
-      - db-data-prod:/jeopardy-db-data
+      - db-data-prod:/var/lib/postgresql/data
 
   backend:
     build:
