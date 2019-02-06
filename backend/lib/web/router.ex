@@ -14,10 +14,11 @@ defmodule JeopardyWeb.Router do
 end
 
 defmodule JeopardyWeb.ErrorView do
-  use JeopardyWeb, :controller
 
-  # good grief it took me way too long to find out you could just
-  # return a string...
+  def render("404.json",_) do
+    %{success: false, message: "route not found"}
+  end
+
   def render("404.html",_) do
     "route not found"
   end
