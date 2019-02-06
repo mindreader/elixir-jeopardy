@@ -4,7 +4,8 @@ defmodule Jeopardy.Application do
   def start(_type, _args) do
     Supervisor.start_link([
       Jeopardy.QuestionServer,
-      JeopardyWeb.Endpoint
+      JeopardyWeb.Endpoint,
+      {Jeopardy.DB.Supervisor, [dbuser: "jeopardy", dbpass: "dbpassword"]} # TODO from config!
     ], strategy: :one_for_one, name: Jeopardy.Supervisor)
   end
 
