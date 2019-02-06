@@ -39,16 +39,17 @@ defmodule Jeopardy.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:httpotion, "~> 3.0"},
-      {:floki, "~> 0.19.0"},
-      {:poison, "~> 3.0"},
-      {:phoenix, "~> 1.3.0"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:phoenix_pubsub, "~> 1.0"}, # only for live reloading
-      {:cors_plug, "~> 1.5"},
+      {:phoenix, "~> 1.4.0"},
+      {:phoenix_pubsub, "~> 1.1"}, # only for live reloading
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"},
+      {:jason, "~> 1.0"},
+      {:httpotion, "~> 3.0"},
       {:postgrex, "~> 0.14"},
+      {:floki, "~> 0.19.0"},
+#      {:poison, "~> 3.0"},
+      {:cors_plug, "~> 1.5"},
+      {:plug_cowboy, "~> 2.0"},
       {:distillery, "~> 2.0"}
     ]
   end

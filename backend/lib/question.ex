@@ -39,7 +39,7 @@ defmodule Question do
   end
 
   def load(fname) when is_bitstring(fname) do
-    q = "#{question_dir()}/#{fname}" |> File.read! |> Poison.decode!(as: %Question{})
+    q = "#{question_dir()}/#{fname}" |> File.read! |> Jason.decode!(as: %Question{})
 
     # some of the questions had their answers inside a single element list during
     # initial scraping (a bug since fixed).
@@ -53,7 +53,7 @@ defmodule Question do
 
   def save(%Question{} = q) do
     fname = q |> filename
-    json = Poison.encode!(q)
+    json = Jason.encode!(q)
 
     File.write("questions/#{fname}", json)
   end

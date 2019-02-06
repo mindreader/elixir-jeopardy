@@ -43,6 +43,7 @@ config :logger, :console,
 
 
 config :phoenix, :stacktrace_depth, 20
+config :phoenix, :json_library, Jason
 
 
 
