@@ -20,8 +20,8 @@ The frontend is written in reactjs.  Fonts are free fonts that are reasonably si
 
 ## Future
 
-  * containerize this whole thing (90%)
-  * get the questions into a database (15%)
+  * containerize this whole thing (100%)
+  * get the questions into a database (20%)
   * add a parser combinator to the scraper instead of the ad-hoc cleanup I have now
   * add training functionality to allow a person to drill themselves on questions
   * try to tag content of questions to allow for training on specific topics
