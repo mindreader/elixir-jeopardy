@@ -8,7 +8,9 @@ services:
 
     environment:
       POSTGRES_DB: jeopardy
-      DBPASSWORD: ${DBPASSWORD}
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      JEOPARDY_PASSWORD: ${JEOPARDY_PASSWORD}
 
     networks: [dev]
     volumes:
@@ -20,6 +22,7 @@ services:
       dockerfile: Dockerfile
       context: ./backend
       target: dev
+
     command: ["/bin/bash"]
     stdin_open: true
     tty: true
