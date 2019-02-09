@@ -9,9 +9,9 @@ defmodule Jeopardy.DB.Supervisor do
     children = [
       {Postgrex,
         name: Jeopardy.DB,
-        hostname: "db",
-        username: opts |> Keyword.get(:dbuser),
-        password: opts |> Keyword.get(:dbpass),
+        hostname: opts |> Keyword.get(:db_host) || raise("db_host required"),
+        username: opts |> Keyword.get(:db_user) || raise("db_user required"),
+        password: opts |> Keyword.get(:db_pass) || raise("db_pass required"),
         database: "jeopardy"
       }
     ]
