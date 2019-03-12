@@ -3,7 +3,8 @@ defmodule Jeopardy.QuestionServer do
 
   def start_link(_args) do
     IO.puts("loading categories")
-    ts = CategoryIndex.load
+    ts = CategoryIndex.load |> IO.inspect
+    (ts.categories == %{}) &&  raise("No questions loaded!")
     IO.puts("finished loading")
 
     GenServer.start_link(__MODULE__, ts, name: __MODULE__ )
