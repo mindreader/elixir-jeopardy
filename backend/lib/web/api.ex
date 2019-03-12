@@ -22,7 +22,7 @@ defmodule JeopardyWeb.API do
     })
   end
 
-  def questions_by_category(conn, params) when is_list(params) do
+  def questions_by_category(conn, params) when is_map(params) do
     case params["category"] do
       nil -> conn |> failure(400, "category required.")
       str ->
