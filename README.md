@@ -20,7 +20,7 @@ The frontend is written in reactjs.  Fonts are free fonts that are reasonably si
 
 ## Future
 
-  * containerize this whole thing (100%)
+  * configure traefik web router support to deal with backend/frontend split (0%)
   * get the questions into a database (20%)
   * add a parser combinator to the scraper instead of the ad-hoc cleanup I have now
   * add training functionality to allow a person to drill themselves on questions

@@ -26,24 +26,24 @@ defmodule JeopardyWeb.ErrorView do
     "internal server error"
   end
 end
-defmodule JeopardyWeb.IndexRoute do
-  use Plug.Router
-
-  plug Plug.Static, at: "/", from: "priv/static"
-  plug :match
-  plug :dispatch
-
-  # This allows
-
-
-  # TODO I would strongly prefer to send this through the same
-  # block of static code in lib/web/endpoint.ex,
-  # but this will be fine for now.
-  get "/" do
-    send_file(conn, 200, Application.app_dir(:jeopardy, "priv/static/index.html")) |> halt
-  end
-
-  match _ do
-    conn
-  end
-end
+#defmodule JeopardyWeb.IndexRoute do
+#  use Plug.Router
+#
+#  plug Plug.Static, at: "/", from: "priv/static"
+#  plug :match
+#  plug :dispatch
+#
+#  # This allows
+#
+#
+#  # TODO I would strongly prefer to send this through the same
+#  # block of static code in lib/web/endpoint.ex,
+#  # but this will be fine for now.
+#  get "/" do
+#    send_file(conn, 200, Application.app_dir(:jeopardy, "priv/static/index.html")) |> halt
+#  end
+#
+#  match _ do
+#    conn
+#  end
+#end

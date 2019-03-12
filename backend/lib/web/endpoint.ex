@@ -7,7 +7,7 @@ defmodule JeopardyWeb.Endpoint do
   # create react app places its static files in non standard directories
 
   # serve "/" as if it were "index.html"
-  plug JeopardyWeb.IndexRoute
+  # plug JeopardyWeb.IndexRoute
 
   plug Plug.Static,
     at: "/", from: {:jeopardy, "priv/static"}, gzip: false,
