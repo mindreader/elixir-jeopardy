@@ -47,7 +47,7 @@ services:
       dockerfile: Dockerfile
       context: ./frontend
       target: dev
-    command: ["/bin/bash"]
+    command: ["npm", "run","start"]
     stdin_open: true
     tty: true
 

@@ -2,13 +2,13 @@ FROM node:8.15-stretch-slim as dev
 
 # RUN apt-get update && apt-get install -y npm nodejs
 
-RUN useradd jeopardy
-
 ENV HOME=/code
+
 WORKDIR /code/jeopardy/frontend
 RUN chown node:node /code
 
 EXPOSE 3000
+
 
 FROM dev as build
 
