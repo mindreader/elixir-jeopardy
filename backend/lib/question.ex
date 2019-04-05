@@ -1,4 +1,6 @@
+
 defmodule Question do
+  @derive Jason.Encoder
   defstruct category: nil,
             question: nil,
             answer: nil,
@@ -39,7 +41,7 @@ defmodule Question do
   end
 
   def load(fname) when is_bitstring(fname) do
-    q = "#{question_dir()}/#{fname}" |> File.read! |> Jason.decode!(as: %Question{})
+    q = "#{question_dir()}/#{fname}" |> File.read! |> Jason.decode!(keys: :atoms) |> case do x -> struct(Question,x) end
 
     # some of the questions had their answers inside a single element list during
     # initial scraping (a bug since fixed).
