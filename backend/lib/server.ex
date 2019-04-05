@@ -1,11 +1,14 @@
+require Logger
+
 defmodule Jeopardy.QuestionServer do
   use GenServer
 
   def start_link(_args) do
-    IO.puts("loading categories")
-    ts = CategoryIndex.load |> IO.inspect
-    (ts.categories == %{}) &&  raise("No questions loaded!")
-    IO.puts("finished loading")
+    Logger.info("Loading categories")
+    ts = CategoryIndex.load
+    Logger.info("loaded categories", metadata: [num: ts.categories |> Enum.count])
+
+    ts.categories == %{} && Logger.warn("No questions loaded!")
 
     GenServer.start_link(__MODULE__, ts, name: __MODULE__ )
   end
