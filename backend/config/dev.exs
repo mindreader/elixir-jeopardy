@@ -20,7 +20,7 @@ config :jeopardy,
   db_pass: "dbpassword"
 
 config :jeopardy, Question,
-  question_dir: "../jeopardy_questions"
+  question_dir: "questions"
 
 
 config :jeopardy, JeopardyWeb.Endpoint,
